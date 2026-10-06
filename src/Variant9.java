@@ -34,13 +34,13 @@ public class Variant9 implements Runnable {
         if (fromFirstElement == false) {
             direction = "последнего";
         }
-        System.out.println(name + " | поиск с " + direction + " элемента");
+        Main.show(name + " поиск с " + direction + " элемента\n");
 
         int previousProduct = 0;
         for (int k = 0; k + 1 < count; k = k + 2) {
             int product = values[k] * values[k + 1];
 
-            String line = name + " | пара " + (k / 2 + 1) + ": " + values[k] + " * " + values[k + 1] + " = " + product;
+            String line = name + " пара " + (k / 2 + 1) + ": " + values[k] + " * " + values[k + 1] + " = " + product;
 
             if (k == 0) {
                 line = line + " разность: это первая пара";
@@ -48,7 +48,7 @@ public class Variant9 implements Runnable {
                 line = line + " разность: " + product + " - " + previousProduct + " = " + (product - previousProduct);
             }
 
-            System.out.println(line);
+            Main.show(line + "\n");
 
             previousProduct = product;
         }

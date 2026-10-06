@@ -1,24 +1,29 @@
 import java.util.Random;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 public class Main {
 
     private static final int SIZE = 100;
-    private static final String STUDENTS =
-            "Faureanu Maxim Platon Stanislav";
+    private static final String STUDENTS = "Faureanu Maxim Platon Stanislav";
+    private static JTextArea area;
 
     public static void main(String[] args) throws InterruptedException {
+        create();
+
         int[] mas = new int[SIZE];
         Random rnd = new Random();
         for (int i = 0; i < SIZE; i++) {
             mas[i] = rnd.nextInt(100) + 1;
         }
 
-        System.out.print("mas[] = ");
+        String allValues = "mas[] =";
         for (int value : mas) {
-            System.out.printf("%4d", value);
+            allValues = allValues + String.format("%4d", value);
         }
-        System.out.println();
-        System.out.println();
+        show(allValues + "\n");
 
         Thread th1 = new Thread(new Variant9(mas, true), "Th1");
         Thread th2 = new Thread(new Variant9(mas, false), "Th2");
@@ -29,11 +34,29 @@ public class Main {
         th1.join();
         th2.join();
 
-        System.out.println();
+        show("\n");
         for (int i = 0; i < STUDENTS.length(); i++) {
-            System.out.print(STUDENTS.charAt(i));
+            show(String.valueOf(STUDENTS.charAt(i)));
             Thread.sleep(100);
         }
-        System.out.println();
+    }
+
+    private static void create() {
+        area = new JTextArea();
+        area.setEditable(false);
+
+        JFrame frame = new JFrame("PCD, Lab 1 var 9");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(new JScrollPane(area));
+        frame.setSize(750, 550);
+        frame.setVisible(true);
+    }
+
+    public static void show(final String part) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                area.append(part);
+            }
+        });
     }
 }
