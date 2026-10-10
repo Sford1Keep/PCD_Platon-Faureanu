@@ -25,8 +25,8 @@ public class Main {
         }
         show(allValues + "\n");
 
-        Thread th1 = new Thread(new Variant9(mas), "Th1");
-        Thread th2 = new Thread(new Variant9(mas), "Th2");
+        Thread th1 = new Thread(new Platon(mas), "Th1");
+        Thread th2 = new Thread(new Platon(mas), "Th2");
 
         th1.start();
         th2.start();

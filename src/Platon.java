@@ -1,8 +1,8 @@
-public class Variant9 implements Runnable {
+public class Platon implements Runnable {
 
     private final int[] mas;
 
-    public Variant9(int[] mas) {
+    public Platon(int[] mas) {
         this.mas = mas;
     }
 
