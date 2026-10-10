@@ -1,40 +1,24 @@
 public class Variant9 implements Runnable {
 
     private final int[] mas;
-    private final boolean fromFirstElement;
 
-    public Variant9(int[] mas, boolean fromFirstElement) {
+    public Variant9(int[] mas) {
         this.mas = mas;
-        this.fromFirstElement = fromFirstElement;
     }
 
-    @Override
     public void run() {
         String name = Thread.currentThread().getName();
         int[] values = new int[mas.length];
         int count = 0;
 
-        if (fromFirstElement) {
-            for (int i = 0; i < mas.length; i++) {
-                if (i % 2 == 0) {
-                    values[count] = mas[i];
-                    count++;
-                }
-            }
-        } else {
-            for (int i = mas.length - 1; i >= 0; i--) {
-                if (i % 2 == 0) {
-                    values[count] = mas[i];
-                    count++;
-                }
-            }
-        }
+        Main.show(name + " поиск с первого элемента\n");
 
-        String direction = "первого";
-        if (fromFirstElement == false) {
-            direction = "последнего";
+        for (int i = 0; i < mas.length; i++) {
+            if (i % 2 == 0) {
+                values[count] = mas[i];
+                count++;
+            }
         }
-        Main.show(name + " поиск с " + direction + " элемента\n");
 
         int previousProduct = 0;
         for (int k = 0; k + 1 < count; k = k + 2) {

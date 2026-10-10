@@ -7,7 +7,7 @@ import javax.swing.SwingUtilities;
 public class Main {
 
     private static final int SIZE = 100;
-    private static final String STUDENTS = "Faureanu Maxim Platon Stanislav";
+    private static final String STUDENTS = "Faureanu Maxim CR-243 Platon Stanislav CR-243";
     private static JTextArea area;
 
     public static void main(String[] args) throws InterruptedException {
@@ -25,8 +25,8 @@ public class Main {
         }
         show(allValues + "\n");
 
-        Thread th1 = new Thread(new Variant9(mas, true), "Th1");
-        Thread th2 = new Thread(new Variant9(mas, false), "Th2");
+        Thread th1 = new Thread(new Variant9(mas), "Th1");
+        Thread th2 = new Thread(new Variant9(mas), "Th2");
 
         th1.start();
         th2.start();
