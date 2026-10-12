@@ -8,20 +8,16 @@ public class Platon implements Runnable {
 
     public void run() {
         String name = Thread.currentThread().getName();
-        int[] values = new int[mas.length];
-        int count = 0;
+        int[] values = new int[mas.length / 2];
 
         Main.show(name + " поиск с первого элемента\n");
 
-        for (int i = 0; i < mas.length; i++) {
-            if (i % 2 == 0) {
-                values[count] = mas[i];
-                count++;
-            }
+        for (int i = 0; i < mas.length; i = i + 2) {
+            values[i / 2] = mas[i];
         }
 
         int previousProduct = 0;
-        for (int k = 0; k + 1 < count; k = k + 2) {
+        for (int k = 0; k + 1 < values.length; k = k + 2) {
             int product = values[k] * values[k + 1];
             String line = name + " пара " + (k / 2 + 1) + ": " + values[k] + " * " + values[k + 1] + " = " + product;
 
