@@ -23,7 +23,6 @@ public class Platon implements Runnable {
         int previousProduct = 0;
         for (int k = 0; k + 1 < count; k = k + 2) {
             int product = values[k] * values[k + 1];
-
             String line = name + " пара " + (k / 2 + 1) + ": " + values[k] + " * " + values[k + 1] + " = " + product;
 
             if (k == 0) {
