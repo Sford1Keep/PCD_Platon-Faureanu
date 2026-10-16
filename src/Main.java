@@ -33,11 +33,17 @@ public class Main {
         Faureanu task2 = new Faureanu(mas, 1, results);
         Thread th1 = new Thread(task1, "Th1");
         Thread th2 = new Thread(task2, "Th2");
+        Thread th3 = new Thread(new Platon(mas),"TH3");
+        Thread th4 = new Thread(new Platon(mas),"TH4");
 
         th1.start();
         th2.start();
+        th3.start();
+        th4.start();
         th1.join();
         th2.join();
+        th3.join();
+        th4.join();
 
         show("Разности произведений пар (с конца массива):\n");
         for (String result : results) {
