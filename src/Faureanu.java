@@ -6,7 +6,6 @@ public class Faureanu implements Runnable {
         this.array = array;
         this.threadNumber = threadNumber;
     }
-
     @Override
     public void run() {
         String threadName = Thread.currentThread().getName();
