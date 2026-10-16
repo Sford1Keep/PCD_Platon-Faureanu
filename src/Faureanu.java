@@ -1,34 +1,37 @@
 public class Faureanu implements Runnable {
     private final int[] array;
+    private final int threadNumber;
+    private final String[] results;
 
-    public Faureanu(int[] array) {
+    public Faureanu(int[] array, int threadNumber, String[] results) {
         this.array = array;
+        this.threadNumber = threadNumber;
+        this.results = results;
+    }
+
+    public static String[] createResults(int[] array) {
+        int evenPositionCount = (array.length + 1) / 2;
+        return new String[evenPositionCount / 4];
     }
 
     @Override
     public void run() {
-        long result = calculateDifferenceOfPairProducts();
-        Main.show(Thread.currentThread().getName() + " => " + result + "\n");
-    }
-
-    private long calculateDifferenceOfPairProducts() {
-        if (array == null || array.length == 0) {
-            return 0;
+        int lastEvenIndex = array.length - 1;
+        if (lastEvenIndex % 2 != 0) {
+            lastEvenIndex--;
         }
 
-        long result = 0;
+        int differenceCount = results.length;
 
-        for (int i = 0; i + 2 < array.length; i += 2) {
-            long currentProduct = (long) array[i] * array[i + 2];
-            if (i == 0) {
-                result = currentProduct;
-            } else {
-                result -= currentProduct;
-            }
+        for (int difference = threadNumber; difference < differenceCount; difference += 2) {
+            int index = lastEvenIndex - difference * 8;
+            int firstProduct = array[index] * array[index - 2];
+            int secondProduct = array[index - 4] * array[index - 6];
+            int result = firstProduct - secondProduct;
+
+            results[difference] = "(" + array[index] + "*" + array[index - 2] + ")-("
+                    + array[index - 4] + "*" + array[index - 6] + ") = " + result + "\n";
         }
 
-        result += array[array.length - 1];
-        return result;
     }
 }
-

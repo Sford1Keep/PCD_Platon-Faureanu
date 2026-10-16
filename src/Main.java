@@ -19,21 +19,30 @@ public class Main {
             mas[i] = rnd.nextInt(100) + 1;
         }
 
-        String allValues = "mas[] =";
-        for (int value : mas) {
-            allValues = allValues + String.format("%4d", value);
+        StringBuilder allValues = new StringBuilder("mas[] =\n");
+        for (int i = 0; i < mas.length; i++) {
+            allValues.append(String.format("%4d", mas[i]));
+            if ((i + 1) % 10 == 0) {
+                allValues.append('\n');
+            }
         }
-        show(allValues + "\n");
+        show(allValues.toString());
 
-        Thread th1 = new Thread(new Faureanu(mas), "Th1");
-        Thread th2 = new Thread(new Faureanu(mas), "Th2");
+        String[] results = Faureanu.createResults(mas);
+        Faureanu task1 = new Faureanu(mas, 0, results);
+        Faureanu task2 = new Faureanu(mas, 1, results);
+        Thread th1 = new Thread(task1, "Th1");
+        Thread th2 = new Thread(task2, "Th2");
 
         th1.start();
         th2.start();
-
         th1.join();
         th2.join();
 
+        show("Разности произведений пар (с конца массива):\n");
+        for (String result : results) {
+            show(result);
+        }
         show("\n");
         for (int i = 0; i < STUDENTS.length(); i++) {
             show(String.valueOf(STUDENTS.charAt(i)));
@@ -44,6 +53,8 @@ public class Main {
     private static void create() {
         area = new JTextArea();
         area.setEditable(false);
+        area.setLineWrap(true);
+        area.setWrapStyleWord(true);
 
         JFrame frame = new JFrame("PCD, Lab 1 var 9");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
