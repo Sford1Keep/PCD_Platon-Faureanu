@@ -28,14 +28,14 @@ public class Main {
         }
         show(allValues.toString());
 
-        String[] results = Faureanu.createResults(mas);
-        Faureanu task1 = new Faureanu(mas, 0, results);
-        Faureanu task2 = new Faureanu(mas, 1, results);
+        Faureanu task1 = new Faureanu(mas, 0);
+        Faureanu task2 = new Faureanu(mas, 1);
         Thread th1 = new Thread(task1, "Th1");
         Thread th2 = new Thread(task2, "Th2");
         Thread th3 = new Thread(new Platon(mas),"TH3");
         Thread th4 = new Thread(new Platon(mas),"TH4");
 
+        show("Вычисления четырёх потоков:\n");
         th1.start();
         th2.start();
         th3.start();
@@ -45,10 +45,6 @@ public class Main {
         th3.join();
         th4.join();
 
-        show("Разности произведений пар (с конца массива):\n");
-        for (String result : results) {
-            show(result);
-        }
         show("\n");
         for (int i = 0; i < STUDENTS.length(); i++) {
             show(String.valueOf(STUDENTS.charAt(i)));
